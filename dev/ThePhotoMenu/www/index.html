@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+    <link rel="stylesheet" type="text/css" href="css/app.css" />
+    <title>The Photo Menu</title>
+</head>
+<body>
+
+    <!-- Application wrapper -->
+    <div id="app">
+
+        <!-- loading gif -->
+        <div class="box loading" id="loading" data-visible="false">
+            <div class="loader"></div>
+        </div>
+        <!-- loading gif / end -->
+
+        <!-- splash view -->
+        <div class="splashView" id="splashView" data-visible="true">
+            <svg
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                width="250px" height="121px"
+                viewBox="0 0 250 121" preserveAspectRatio="none">
+                <g>
+                    <image width="250" height="121" xlink:href="data:image/png;base64,
+                    iVBORw0KGgoAAAANSUhEUgAAAPoAAAB5CAYAAAAQyDxLAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+                    bWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+                    bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+                    eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1
+                    MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+                    dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+                    dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+                    IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+                    ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+                    cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChNYWNpbnRvc2gpIiB4bXBNTTpJbnN0YW5j
+                    ZUlEPSJ4bXAuaWlkOjI4MDE3MzY5QkY2NjExRTNCOEU5QUE0MjgzQURGMDEzIiB4bXBNTTpEb2N1
+                    bWVudElEPSJ4bXAuZGlkOjI4MDE3MzZBQkY2NjExRTNCOEU5QUE0MjgzQURGMDEzIj4gPHhtcE1N
+                    OkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MjgwMTczNjdCRjY2MTFFM0I4
+                    RTlBQTQyODNBREYwMTMiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MjgwMTczNjhCRjY2MTFF
+                    M0I4RTlBQTQyODNBREYwMTMiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94Onht
+                    cG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5iWzyqAAAWHklEQVR42uxdC7hVRRVeh+fliqCQVqYC
+                    hm8tTDPNIjIffZGSmlqZZZplD7OXZfa0MC2trLQ0ozIte2hQmqmRQZhiaqkYQiISkhEpcLk87ot7
+                    m7+9tsydM/vs1+zHOXv937e+e/feZz9n/pk1a9ZaU1u7cDoJBmF/JbcqmahkY873HsHyYSXflKIQ
+                    uMIw+QSDMEPJzUqG8vbogp7jCiX7KXmvFInABYbIJ3gOH1MyRyN50XiPknlK2qVoBEJ0N5il5PIS
+                    PtdrlPxdyV5SRAIhenJsr+QeJWeW+BlhK1ik5A1SXQVC9PiA0W2xksOb4FlhoPutkvOkygqE6NFx
+                    vJKHlOzaZM8NI93VUm0FQvRwfFzJr6l5ZxxgiZ+vZJRUX0GRRMc1h8eQETk2ON9XclkLlNtU8ox0
+                    +0gVFkRBFr3a0Up+Qp6zSV+E379QyVlKfpbhe26n5E4lr2yhspvEw48TlPxOqrIgb6KPUTKeJSp2
+                    zPAdYXS7TcnuLVh+I/ndxJNOkLvqviHBOeszer/jlPytRUmuA0a670p1FjTq0T/NvXCXg+t1KDks
+                    wXmnKXmBkh0cvddmJRPI8y4bWpGyPEfJvkpuIc8/oNbE7wLX4yeVXGk59molpypZq2QgwrVqXL+v
+                    UfKYktOVHMKdC/Y/wENNHXuQZ/TsUdLP3xP2ncV8HI5MM3h4GvYM45T8OeOhafhHWLtweicV59Mt
+                    EARhpZIXU72d5xIlFyS43juUXK9krpLXafv/xMTVATvTnca+U5T8kv+fyR1kVMxWcmKrqe4CgQts
+                    IrsxtzPF9chyTVuEYr9ln95zdzXbxxSiC5oN2yc8b7uA/QNV+GgSpipoNtzO495neQyNMTimZ1+k
+                    /QY+BjcqaSPPRoOx+F8yfKYtPIZfQ/WOTJh9WiBEFwjiYT6LjqkG0e9XcnGOz9TB9/uPqO4CQXYY
+                    YWyPzPn+w8veaQrRBa2AmnwCIbpAIESXTyAQCNEFAoEQXSBoemy17Iub5ruPokVqFgaZXhNUHYjp
+                    RwbgkdzxYarsoJjXQPTldeQFdPkzALgePOjOVbJKiN58QDDEMiVLlTyu5CnyHCVQQeA40Uuet9Uw
+                    LuztuSLsRl4M+d7kZXXdTT5lKYCySJsBGOQ+NuDYl4TozQGQdyF5wRD3kpeR9RkHFQMLNLxMyZFK
+                    XqtkF/nULYcBrj+iupe4gEBsuFEisYNrjye4bj7E8gMmPsIv38zyPCmClkCN6p15hOglAHrqa8nz
+                    W16e431B/D+wfFTJSeRljTlYiiRzoJx/SttyFyI67gAlJ8e4Bs75JHmhtX7IN3zsYaB7UoheHqDH
+                    /gp5WVqKDkGEqncDyzQlX+TeXpANEADzWWPfYTGJjhBYrNm3pqwvWfXptR4uZKSa+gaVL854HnkB
+                    G0dzhRTkw4G46935GY1JiF4+ILc7FnCYyYQvM+ayOgl1vle4mcvYuuVbM5dApezm/zFWgZFrgzZu
+                    gcrTn/M7YzwFg9eblPy3ycoLmV6Rz+xPBdwbZXkZNzb3S1sgRNcBizWS7MHIdQwbK1BJTmPSv5Oy
+                    TQhg4o/k5SG7uYnLDHOyyHF2Yc73hUPIJ7ixOVTJR4Q+QnQfC5jIIPoy7sGRGeQpHnOCcItzelc4
+                    RRzZhL14EJAkEUkON+Z0v3nG9hU87BEI0elfNDgn1xCWbt4/nImfNc5Wcn4Llt9dSqYo+UcO97KV
+                    0+fIy5tfdVTe130N38Mfh+OvP7+Iv3ARXZvh/dGYvJGHEK2KJ5S8QskdrFJnhXEB3/dSJT+vONHh
+                    5ozFOzFNO8ry3e6hbamiW5Loz/BH8KettjLJfcsxnBSyWqUF94L/8R8qUNHW87j990peldE9DgzY
+                    jwoMf+69Kkz0diZ6ECYUTfSsVffV5GXg7NHIRxrRobqvy+jex1WE5D66uGHLyiI+uYHWdGMTf7dK
+                    pKHKkuidrLrryz31aaq736NnQXQsu1PFFUY381AlC7fLCQ2O3Vnwe48M2W6kxW4XkRe1iNev3Bjd
+                    H3ubPfoQrWfPokeHgeiGCquRaFyxlPLd5HapLYTVIke5zSiHMShCdvcs6J1nsSaDUGGEBP+xwW+h
+                    fSznejdWyX2W36Ch/DZ5RuN+rsNLtOO4/vO4MwtbAALfbH4rE32D1mL6TjP9NDijx3Bya4z7BY8X
+                    q46HyZtpcKlSYxHMnSh4luTuAon+nZiNwqyQ32Aq+EMNjt/FIqo7j8+BNo3ofUYLiGObHN0PrfBZ
+                    wvHngNU7v+b4mjs3OLZQPnk1ie7HcI/Sxuj9xj3buOd34b/9PsrPeaRZ8CnyYt5dodE680vkc1eT
+                    6GssPbpO6AFuBDZT8hUyfaDnukOKsw743uc5Vt+D4CLzjqAJif5vjej6PLpP9hptcy5IQ/QV5MVs
+                    C+xAAMzljq7VKPPNOm24JqgQ0f9rIXofDTbG+URPo3J/mbYZ/gR2fFVreNNgbMjxp+VTV4/ovjW9
+                    XVPdAd/Sj/n00Sl79AfJS/0kCG90v+7gOmFrk6+TT13dHh1OMX4mzC3GeL2N/0/aI18mRRgZSJOV
+                    Ng9eWBaVTvnM5URW8+hwkPHnWy/UiP4JTXV/q9YYJJlie4AkmCIO8I2vZjU+KcI8wjrkM1erR+/Q
+                    SIz57dXa/yv5/0dp2xRckjH6NVJ8sXE9pUtdHUZ06dErSPQ4UWlxk9wjy8qvpPhiY3XK7zY05HiX
+                    fOJqqe5xk0kMxPz9HMo2jr2VgTiA9yU8d6AkRMeqNmfy8+gJH2q8D74ZcODB1GK3pbHCubvy7+DH
+                    jihH06UV66+dwL/BOXD2+iHZpxCx6s7blLyEvPjzXu6McN1f8DV0wD15txhD1na+3iwanGMRNq5T
+                    lRzF1/NjRx5R8hPSMgdnRfS4CR/bYv7+JuFrYiAABbMVSRaHCAvpzCvLCnzqo8Q0QKv8OA32bQdp
+                    PsdE9zHOQnQsk/VZy7cziY7ZjKD8eW8nb72Ak2lbQk9o0edT/LiAVUxev9E4Qsls8uIPTEwnzysS
+                    gTkfylJ1RwLGHWL8fmKM32Jsf7fwNRWShpX2pjzuClHTc6MOYtWdS7R93ZYedktE7cTsga+k8CSZ
+                    O3PPfpjWCSbJfLxJ004OZg7sFHLOufz+mREdL3cdRQvq/wB52VGiAskmtwpXCyF6WI89UNL3vYC8
+                    hTBc4lVcd6MOkfXZjiS80+Pm48ycINDrmCzDVI9ndQP5021ZTzA2uorVmzi4VXiaGpiaxJz6HjHP
+                    K/NqJKgXiC2HU880qs+f905Wn111Eu+y7EPnhilMBP/MNNRzLKuF1XP/St7CmtB6MUsBHxIsznGS
+                    ZXj6GHlOZaO5vPDs+5KXzVgHZrMwdf1PHv+fbRw/OeuccbtwD3ycQdDxTP5JMa+HF10qPE2NjVyJ
+                    4hK9zGv1YRw+R9teQIPz503T6pALmDn0kIziDP4fIbv/pvqFNg5nol9q7J9mIfpXuEE28TrLPhgX
+                    5/H/Pq+O0o5PzWtJpi8b219KQHIAqYUXC0+dIEn8eNgYvMge32yE5hrbyDzjKgXUeKpfz/5eY/tB
+                    qvdEnBSjAQ1yNzbH5Wu58dBhGhZ3yYvoo41KkDQTyUrhpzM8nOCcsN5waInez5x+hSt2m6NrD7W8
+                    q2mo67E0jHE0oiD7lrkA5JYIDXBuiyx2Gw+TdBrmUeGnM6xKcE5YuZVJtTeJmNTabcMA1Rseh1i2
+                    h8RsKJO+Z60sRO+LqQIGYZnw0xmeovihq2EVdVSJ3q9W8P1qGT1DopmNvIjeZVFrkuBfwk9nQDaY
+                    NY7H6G0ler/+nIjXFCiK6ElVGEkw4RYdKclT5jF6nB52c8R9TYthBRG9N+E1JAzSLeI2nGGa2K4F
+                    voup0r7I2N7YoP5gGg5TVGO4MYDr7HQhenx0O1Dduy3XEaRD3PDgcQ2OXazkHQW+iz51Bj/wd8cY
+                    9r2G4nlniuqe4Ri99EvTNiHilsMMqvfK8kl+YcHvAr/zFeTlQYAfuBlr4TvTDK9iQec5vZZWda+0
+                    MaVE5f9uy7j8bSV4FzjEYH04W6ZaJNv4XsDYvRJopjH6MCq3C2YzIomnmLl4JQyr8FacWNJ3hEPJ
+                    idQ4sw6chxDo084NAYY0iDabKkTPX3Vvp3qvIEE6jElwzoMBRHlDwe+CBqefidrLY/JbyPMZD0uf
+                    hcbrU8a+s4ToxRB9GMWLcReEI8lqqzNocLwBtIKTSvAuWJHmGlbfkWUlTgaiERH3CdFzGKOTEN0p
+                    YJQan+A8M2oLU2q7l+B94OUHY+0TCc6tRdzXtCjK6p6U6BOEn86AddSen+C8Zy1j4O4K1eWiUWsm
+                    oid1gd1b+OkMSCa4owOiD1Tw29lmgPoDbAZZ860/Shk0G9H3EX46Q1LtaJ1FO6uaf4MtEs6cnx9K
+                    2USvdVtsCcPKQnRXY3Sk3xHLuxsclvC89fLprAFBU4xtpICebLEjuLi3DvgNmPkdXm6ekxfRtzgi
+                    Ol7oQKlnTjDFUY/eR9VM1rnE2MZsBNJIw8CJ/O7ftpzzgIP72qY3r+WGBavdIhHmCcbxe/Iiem9I
+                    Dx8HBwlHU2NiCqKvjTAWrQJ+Ztl3Efe48Cs4wjiGNGjzHdx3gaXBQNLJv7O2dYnlnNnNproDrxee
+                    pgbygo9JeK4ZAWbLtlIF/FrJzTF+/0WH9/5MjN/CGeimooiexnjzSvKmhgTJcXzC89B7m3HaPZS/
+                    Mc5mfIpqu4HxaqRlH0XYZybWQKryKOnHkWp6ToPjtoQdjWL776BokYL43YlBHywPovekuBayYGK5
+                    nBuFr4mwA3+/pL35xhK8w9PkrQzrNz6jSVtnLASYAcLSRjCUdfKYeoHld1C/kVt9A/MEw5NVlmsh
+                    lfkblZxOXn720fxbLN00jzxvvRUhz/QE12efF7DgPxVyzvV8fayjdyR3fui4N/G3+JHeCNXWLpze
+                    SclcIeMAsb56jutjuLVJijkWg4MgGrAu/U8TnruCK7Oe8RSVC7n8Jjl+TuSd368Jv+9wJnreBkp/
+                    Os86LM5Lde9x2KMTt6D7CmcT4bQU526g+rTGkRw2KoReKmYWYis1sH01ozHOH3KcLnUqNl5K6VIk
+                    BaWe6pdPW27kQfStjsfoPs4ge5IBQTDOSXl+R4MyFlSc6L0WYruw0r5QyXukCCNjT9q2NlhSdAbs
+                    F9VdiJ4Z0YEPUvga0QIPH6P0edc7GpSxQIhep7q7UvXQq58vxRgKeGm918F1npVPKUQPQg/ZjXGu
+                    DDjoqQ6RomyIix1dZ32DMhZIj15XEbY6VN/xDt+QogzER8hdzvJ1AfvF6i5E/z+hbWN0l26TWGnj
+                    k1KcdYCvwUUOrxdEdLG6C9GtvtANJ/cTAlE7U6VInwMyoMxSsr3Da65toLUJSow8fN17A3r53gwq
+                    Nvx/D6J4GUBbFd9Scrjja5Yl6QTWVXsLDxn8TgQzCpgV+DHVZzQCpnPd0GcOEME3V8l9vI2sOydT
+                    NBsSgmiQUvpG7rgQg46U15u0ThTusPCr1xNOTFRyKnk5GtAIL1LyGz4GN+JT+PlrfA24K6/Wzt+F
+                    332AjyPI6IcB75wr0bsDiJ5FxBOykSJO+JiKkxyBDh/M4LqbG2hteQ9JLg84hljtv1r2YwhzsGX/
+                    KI3o+yu5LMZzPE5eqCpIeyTZY8FByK9p23iGS7XtOzSiH2IcAxYaRN/PuF4fP0NX0ap7V8CYLqvQ
+                    xqO5hasqkOnkOxlcFz1hWRxmGtUdW15B+FpMjnCtuLYGPXgl6JleG8KH/hCu9Id0nD1Rnrsoomeh
+                    uus4g1XXqgGV6qaMrm0LaCnjGN2WYx5prcdmcK+hEbTiQ2lwWu0sGsXQaxapumddOc7l1vDDFSH5
+                    NCW3Z1imjYheJqu7LbR1zxTXg2q9XMl2xn6M75dSeFq0nXj8/vsiP0oeRO/KcYxu4jw2mrS6T/x0
+                    HudlqaFtaFBmZfJ1PyCiOh8VM8lbhjkNXl800fNQ3btzHqObOJu8xfZadV3s95OXSSTrsuxocKxM
+                    nnGwyI8y9u1RMEdeXvRHKWqMPpDzuA6JKh5RsleLkfy7Sq7K6V4bmuSb7Ez1K/oUvTbcEVTwKkNF
+                    EZ0ofwMO1LdHKVpSvbIDPRTye5+T4z07Y2ptRUInFRJBTs75/gNGvQfPDq4q0YtYxgfq+3VKZisZ
+                    16Qk/wB5RqCX5XzfMjshPWs0NhOMHn4i/w+HnzU5PE+NG+IV2r5jhej5401KVlJzGemQBuovSq6k
+                    /LL3RiV60WuvoeHT/fD1fIK7afUcWVz/kdMzgegPadt+hOXGViX6ppgNQF7AdMk1rM6X2ZMOxqXr
+                    udIUadR5psSqO1xM9XXRDwggPXrzp2NeO2lkHmwa87RtTPshtXRHER+oqHn0MvQCPuD2iLlSuE7C
+                    TfLWkjwX5n4RkXcmJVwT2zEaVdChBT/batY4/GWQdiXP973LGK/DZXVEzGt/lDxj7mhNLYeP+hVk
+                    d7XVO7J5xj44NC1pVaKfy70nPjIMcJjXfoWSo0rWc0K1uoV7hquV3ECDfYzzKg8ERsBXvWxLT81k
+                    u8AT3FtBG0RyTgSKnFLws4Hkuh8+FjOAwXIxa0Q+QLK4hrmg9QNuCyE6bEAPcx3yVxZ6taF5tBTR
+                    MbXxhSYaC2NpZgQ2ILgAkU1wKYWzwz8zHEIgvBYrfpxEnvGojMDU5AUlfbYRxngYmMRE14m93CB+
+                    GoSp9L4GsEgj+uGW52wZojcroI4eyzLArTNWm7mfvFVEliYwrAzhhgTq5BRWNbGW3Bj53KnQxoTS
+                    sZPWcPvAMkcjHd1zSIT64/f8R2vDMdgPehIMIYToOaDGxJxijFlhxV2h5D/kWX03sk2inwsSHlo7
+                    soq7O48dX0D5LZxRFeBbP8nqe7tGKgSyjOdtGIWXUb3PehiuYhV9B60utIeo7aTZVfT1zPE8cFfO
+                    PTZAiJ4cY1n2l09RONBL9/H490DetzcNThqKsXJnAqIjv0EaX/e72TawD5N/TyrAuCo9i6AV4Pu2
+                    6yuqQos6VNt+2lCp8+LIgNGrDxGiCwTJ4Acs6QZTGN1maNuPJSS6C9xe9AcS1V3QSliq/f9iGmyI
+                    W1Ig0dGj91KBEZTSowtaCY9o/9cMFXmVtj9vQJt4OMLvbM9mGu76LefUhOiCKmEFBUdFLi/42e5K
+                    SHQzqcdIy/EBIbqgSkAU27KA/Y8nvKarqbAolntb4JC53Ng+lnfbJGN0QdUAy/u+xj4E5CRNnAGP
+                    RTjfmGHNsPRjym42RQt8uYcGu8PaAPUePhl6MslPk+fhh7TPWFrr85bxf7cQXVA1rLTsezzF9Rot
+                    9QXt4XcUnO/e7HkXhRAdjRHcrd+u7YOT1Xzy/ARsfL0tykuI6i5oNTwWcZ8LxM19GCUy8qsxOmX0
+                    5tcK0QXNjNENNE7TT7xN+/8Ry+91Q5w5vTY8hYY7TDvHnDqzrXn3N8s+83kW8XAhzDaABBoz4jzo
+                    z8nzB94kdUtQEozlXjiot0Rwys1MhrE0OJUy1HQk6mjn8/H3Pu34XUzKNTz2ftC47hzyYsnDiObn
+                    dfcz4D7KavR65pMtvfO95C3xPZnVdNx/bkDPj3RYiIVHUpSJ3Lht5HvCLfdqipF9938CDABd5quu
+                    K9DQbwAAAABJRU5ErkJggg==
+                    "/>
+                </g>
+            </svg>
+
+            <!-- <img src="img/splash-logo.png" alt="The Photo Menu"> -->
+            <!-- <div class="box">
+                <div class="loader"></div>
+            </div> -->
+        </div>
+        <!-- splash view / end -->
+
+        <!-- home view -->
+        <div class="homeView" id="homeView" data-visible="false">
+            <h1 class="homeView_title">Ordering food without seeing can be tough.</h1>
+            <p class="homeView_desc">Tap below and select the place you are at <br> so you can see pictures and make your decision.</p>
+
+            <div class="homeView_circle-start" id="buttonGetPlaces"></div>
+
+            <div class="homeView_img-bottom">
+                <img src="img/home-img-bottom.png" alt="image bottom">
+            </div>
+
+        </div>
+        <!-- home view / end -->
+
+        <!-- template wrapper -->
+        <div id="templateWrapper" data-visible="false">
+
+        </div>
+        <!-- template wrapper / end -->
+
+    </div>
+    <!-- Application wrapper / end -->
+
+
+    <!-- places template -->
+    <script id="places-template" type="text/x-handlebars-template">
+        <div class="placesView">
+            <h2 class="placesView_tit">Where are you at?</h2>
+            <form id="searchForm" action="/search">
+                <label for="" class="placesView_search">
+                    <span class="placesView_search-icon">
+                        <svg
+                            version="1.1"
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                            width="18px" height="17px"
+                            viewBox="0 0 18 17" preserveAspectRatio="none">
+                                <g>
+                                    <image width="18" height="17" xlink:href="data:image/png;base64,
+                                    iVBORw0KGgoAAAANSUhEUgAAABkAAAAYCAYAAAAPtVbGAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+                                    bWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+                                    bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+                                    eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1
+                                    MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+                                    dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+                                    dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+                                    IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+                                    ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+                                    cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChNYWNpbnRvc2gpIiB4bXBNTTpJbnN0YW5j
+                                    ZUlEPSJ4bXAuaWlkOjQ1OEQ1MDU1QzI3ODExRTNBNDhCQjkzMzRBNzhFQ0E0IiB4bXBNTTpEb2N1
+                                    bWVudElEPSJ4bXAuZGlkOjQ1OEQ1MDU2QzI3ODExRTNBNDhCQjkzMzRBNzhFQ0E0Ij4gPHhtcE1N
+                                    OkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NDU4RDUwNTNDMjc4MTFFM0E0
+                                    OEJCOTMzNEE3OEVDQTQiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NDU4RDUwNTRDMjc4MTFF
+                                    M0E0OEJCOTMzNEE3OEVDQTQiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94Onht
+                                    cG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4iFyuZAAACFElEQVR42qyWPUgcURSFZ/zdBXXFKhF2
+                                    JRBRBAUjGxKUYCQxIAgRC2NQIY0oxkLERiVVYmWljTabzmhjEUinoCCiYAIWFv4UYvAvAWWNoqJE
+                                    z4NTLJc7szPogY9h3tzZ8959d+5bu6K+xXJQFXgDXoJCEOD4HvgFfoAZ8MdKojRl7AkYBA0O7+SA
+                                    YvAebIFhMO5mkiLuP4A5FwOpx2AMTCSs1NWkDcRAtuVfzUxfwC1dURpoWuQPmL0IMtasNFfE1YAR
+                                    0C5/wMbG27gugafi2T74SINL8SwMhoBWNdVgXqbrtWJwwOBpxcDoN2jlfkj1aXvSqAR2gQ0Pe9EJ
+                                    1pTSj0iTShG0zhV41VdxH5KZSZGuMp8etAyuxdhDaZIhAuI+TU4VkzRpElc+MD+KKN/HP2kiN+4V
+                                    yPNhUq+MbUqTWRFgvvgvHg3KWcqJ2gYr0mQKXIjADtCbxMA0yW8gU4xPgrPEgdT8orIjdlZZyrWc
+                                    6SHb+X+QDh6AHnbesHjnL3grC8HmeRJk6UaVGd+AHfauLPCIV01XzMCo1oXPOYNV5UXT2wrAc1Dq
+                                    YmBxpaZJ9ju1ejPTF9wjP9J6mymcz06H1gl4x1Nvhqlykin9T2zxP5XnA1yVevxarBrDM1DCfQgx
+                                    rbs8dhc4KaM69jtZPN0mxnb5I+FXZhLfmXLXM/4uirN4ZIPdu08To2P+jYoxlSatTbcCDADD22fL
+                                    O6HbXgAAAABJRU5ErkJggg==
+                                    "/>
+                                </g>
+                            </svg>
+
+                    </span>
+                    <input type="search" class="placesView_field" id="searchField" placeholder="Browse nearby">
+                    <input type="submit" id="buttonSubmit" style="position: absolute; left: -9999px" />
+                </label>
+            </form>
+
+            <ul class="placesView_list" id="placesView">
+                {{#each .}}
+                <li class="placesView_item" data-place-latitude="{{ latitude }}" data-place-longitude="{{ longitude }}" data-place-name="{{ name }}">
+                    <a href="#" class="placesView_button" data-place-id="{{ id }}" data-api-4sqr="false">{{ name }}</a>
+                </li>
+                {{/each}}
+            </ul>
+        </div>
+    </script>
+    <!-- places template / end -->
+
+    <!-- place search template -->
+    <script id="search-template" type="text/x-handlebars-template">
+        {{#each .}}
+        <li class="placesView_item" data-place-latitude="{{ location.lat }}" data-place-longitude="{{ location.lng }}" data-place-name="{{ name }}">
+            <a href="#" class="placesView_button" data-place-id="{{ id }}" data-api-4sqr="true">{{ name }}</a>
+        </li>
+        {{/each}}
+    </script>
+    <!-- place search template / end -->
+
+    <!-- location media template -->
+    <script id="location-template" type="text/x-handlebars-template">
+        <div class="locationView">
+            <a href="#" id="location_close">Touch to return to places</a>
+            <h2 class="locationView_tit">Go for it.</h2>
+            <ul class="locationView_list">
+                {{#each .}}
+                <li class="locationView_item" >
+                    <a href="#" class="locationView_button">
+                        <img src="{{ images.thumbnail.url }}" alt="{{ caption.text }}" data-image-big="{{ images.low_resolution.url }}">
+                    </a>
+                </li>
+                {{/each}}
+            </ul>
+            <div class="locationView_thumb-detail" id="bigThumbnail">
+                <img src="">
+            </div>
+        </div>
+    </script>
+    <!-- location media template / end -->
+
+
+<!-- scripts -->
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="phonegap.js"></script>
+<script type="text/javascript" src="js/vendor/fastclick.1.0.1.min.js"></script>
+<script type="text/javascript" src="js/vendor/zepto.min.js"></script>
+<script type="text/javascript" src="js/vendor/handlebars-v1.3.0.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+
+</body>
+</html>

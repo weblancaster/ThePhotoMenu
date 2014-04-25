@@ -1,0 +1,373 @@
+@charset "utf-8";
+/* ==========================================================================
+#   Application style structure guide
+#   @Default
+#   @Application
+#   @home
+========================================================================== */
+
+/* ==========================================================================
+@Default
+========================================================================== */
+* {
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+    box-sizing: border-box;
+}
+
+body {
+    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+    background-color:#45b19d;
+    font-family: Helvetica, sans-serif, arial;
+    font-size:12px;
+    height:100%;
+    margin:0px;
+    padding:0px;
+    width:100%;
+}
+
+ul, 
+ol,
+li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* ==========================================================================
+@Application
+========================================================================== */
+#app {
+    -webkit-overflow-scrolling: touch;
+    padding: 70px 0 0 0;
+}
+
+#app > div[data-visible="true"] {
+    display: block;
+}
+
+#app > div[data-visible="false"] {
+    display: none;
+}
+
+/* ==========================================================================
+@Splash - view
+========================================================================== */
+.splashView {
+    width: 250px;
+    height: 155px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -77px;
+    margin-left: -125px;
+}
+.splashView img {
+    display: block;
+    width: 250px;
+    height: 121px;  
+}
+
+/* ==========================================================================
+@Home - view
+========================================================================== */
+.homeView {
+    color: #334d5c;
+    text-align: center;
+    margin: 0;
+    position: relative;
+}
+
+.homeView_title {
+    font-size: 15px;
+    margin: 0 0 5px 0;
+    font-weight: normal;
+}
+
+.homeView_desc {
+    font-size: 12px;
+    margin: 0 0 50px 0;
+    font-weight: lighter;
+}
+
+.homeView_circle-start {
+    width: 154px;
+    height: 146px;
+    background: #e1793e;
+    margin: 0 auto;
+    border-radius: 150px
+}
+
+.homeView_img-bottom {
+    width: 200px;
+    margin-left: -100px;
+    position: fixed;
+    bottom: 0;
+    left: 50%; 
+}
+
+.homeView_img-bottom img {
+    display: block;
+}
+
+/* ==========================================================================
+@Places - view
+========================================================================== */
+.placesView {
+    width: 275px;
+    margin: 0 auto;
+}
+
+.placesView_tit {
+    text-align: center;
+    font-size: 25px;
+    color: #efc94c;
+    margin: 0 0 15px 0;
+}
+
+.placesView_search {
+    display: block;
+    width: 100%;
+    height: 38px;
+    position: relative;
+}
+
+.placesView_search-icon {
+    display: block;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+}
+
+.placesView_field {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 0;
+    background: #eec84b;
+    color: #334d5c;
+    font-weight: lighter;
+    padding: 0 0 0 32px;
+}
+.placesView_field::-webkit-input-placeholder {
+    color: #334d5c;
+}
+.placesView_field:-moz-placeholder { /* Firefox 18- */
+    color: #334d5c;
+}
+.placesView_field::-moz-placeholder {  /* Firefox 19+ */
+    color: #334d5c;
+}
+.placesView_field:-ms-input-placeholder {  
+    color: #334d5c;
+}
+
+.placesView_list {
+    margin: 10px 0;
+    padding: 0;
+}
+
+.placesView_item {
+    color: #334d5c;
+    font-weight: lighter;
+    font-size: 13px;
+    border-bottom: 1px solid #334d5c;
+}
+.placesView_item:last-child {
+    border: none;
+}
+.placesView_button {
+    display: block;
+    text-decoration: none;
+    color: #334d5c;
+    font-weight: lighter;
+    height: 35px;
+    line-height: 37px;
+}
+
+.placesView_item:first-letter {
+    text-transform: uppercase;
+}
+
+/* ==========================================================================
+@Location - view
+========================================================================== */
+.locationView{
+    position: relative;
+}
+
+.locationView_tit {
+    text-align: center;
+    font-size: 25px;
+    color: #efc94c;
+    margin: 0 0 15px 0;
+}
+
+.locationView_list {
+    overflow: hidden;
+    margin: 0 0 0 1px;
+    transition: -webkit-transform .5s ease-out;
+}
+
+.locationView_item {
+    display: block;
+    margin: 0 1px 2px;
+    float: left;
+    border: 1px solid #fff;
+    width: 104px;
+}
+
+.locationView_item img {
+    display: block;
+    width: 100%;
+}
+
+.locationView_thumb-detail {
+    position: absolute;
+    top: 45px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    transition: -webkit-transform .5s ease-out;
+    -webkit-transform: translate(400px, 0);
+}
+.locationView_thumb-detail img {
+    border: 1px solid #fff;
+    width: 306px;
+    margin: 0 auto;
+    display: block;
+}
+
+.locationView_list.active {
+    -webkit-transform: translate(-400px, 0);
+}
+
+.locationView_list.active ~ .locationView_thumb-detail {
+    -webkit-transform: translate(0, 0);
+}
+
+
+/* ==========================================================================
+@Close location
+========================================================================== */
+#location_close {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    color: #fff;
+    background: #334d5c;
+    text-decoration: none;
+    font-size: 12px;
+    text-align: center;
+    padding: 25px 0 0 0;
+}
+
+/* ==========================================================================
+@Helpers
+========================================================================== */
+
+/* -------------- loader -------------- */
+.box{
+    display: block;
+    height: 35px;
+    width: 250px;
+    position: relative;
+    margin: 0 auto;
+}
+.box.loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -125px;
+    margin-top: -17px;
+}
+
+.loader:before {
+    content: "";
+    position: absolute;
+    top: 0px;
+    left: -25px;
+    height: 12px;
+    width: 12px;
+    border-radius: 12px;
+    -webkit-animation: loaderB 3s ease-in-out infinite;
+            animation: loaderB 3s ease-in-out infinite;
+}
+
+.loader {
+    position: relative;
+    width: 12px;
+    height: 12px;
+    top: 46%;
+    left: 46%;
+    border-radius: 12px;
+    -webkit-animation: loaderM 3s ease-in-out infinite;
+            animation: loaderM 3s ease-in-out infinite;
+}
+
+
+.loader:after {
+    content: "";
+    position: absolute;
+    top: 0px;
+    left: 25px;
+    height: 12px;
+    width: 12px;
+    border-radius: 10px;
+    -webkit-animation: loaderA 3s ease-in-out infinite;
+            animation: loaderA 3s ease-in-out infinite;
+}
+
+@-webkit-keyframes loaderB{
+    0%{background-color: rgba(255, 255, 255, .2);}
+    25%{background-color: rgba(255, 255, 255, 1);}
+    50%{background-color: rgba(255, 255, 255, .2);}
+    75%{background-color: rgba(255, 255, 255, .2);}
+    100%{background-color: rgba(255, 255, 255, .2);}
+}
+@keyframes loaderB{
+    0%{background-color: rgba(255, 255, 255, .2);}
+    25%{background-color: rgba(255, 255, 255, 1);}
+    50%{background-color: rgba(255, 255, 255, .2);}
+    75%{background-color: rgba(255, 255, 255, .2);}
+    100%{background-color: rgba(255, 255, 255, .2);}
+}
+
+@-webkit-keyframes loaderM{
+    0%{background-color: rgba(255, 255, 255, .2);}
+    25%{background-color: rgba(255, 255, 255, .2);}
+    50%{background-color: rgba(255, 255, 255, 1);}
+    75%{background-color: rgba(255, 255, 255, .2);}
+    100%{background-color: rgba(255, 255, 255, .2);}
+}
+@keyframes loaderM{
+    0%{background-color: rgba(255, 255, 255, .2);}
+    25%{background-color: rgba(255, 255, 255, .2);}
+    50%{background-color: rgba(255, 255, 255, 1);}
+    75%{background-color: rgba(255, 255, 255, .2);}
+    100%{background-color: rgba(255, 255, 255, .2);}
+}
+
+@-webkit-keyframes loaderA{
+    0%{background-color: rgba(255, 255, 255, .2);}
+    25%{background-color: rgba(255, 255, 255, .2);}
+    50%{background-color: rgba(255, 255, 255, .2);}
+    75%{background-color: rgba(255, 255, 255, 1);}
+    100%{background-color: rgba(255, 255, 255, .2);}
+}
+@keyframes loaderA{
+    0%{background-color: rgba(255, 255, 255, .2);}
+    25%{background-color: rgba(255, 255, 255, .2);}
+    50%{background-color: rgba(255, 255, 255, .2);}
+    75%{background-color: rgba(255, 255, 255, 1);}
+    100%{background-color: rgba(255, 255, 255, .2);}
+}
+
+
+
+
+
